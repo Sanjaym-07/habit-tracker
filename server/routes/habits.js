@@ -3,9 +3,13 @@ import Habit from "../models/Habit.js";
 
 const router = express.Router();
 
-router.get("/:userId", async (req, res) => {
+import auth from "../middleware/auth.js";
+
+router.use(auth);
+
+router.get("/", async (req, res) => {
   try {
-    const habits = await Habit.find({ userId: req.params.userId });
+    const habits = await Habit.find({ userId: req.userId });
     res.json(habits);
   } catch (err) {
     res.status(500).json({ error: err.message });

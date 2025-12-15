@@ -5,6 +5,8 @@ This folder contains the backend for the Habit Tracker app and implements schedu
 ## Environment variables
 
 - `MONGO_URI` — MongoDB connection string (required)
+- `JWT_SECRET` — Secret key for signing JWTs (recommended in production)
+- `JWT_EXPIRES_IN` — Token expiry (e.g., `7d`) optional
 - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` — SMTP settings (optional; if omitted, an Ethereal test account is used for development)
 - `EMAIL_FROM` — Optional from address for outgoing emails
 - `NODE_ENV` — `production` or `development`
@@ -14,6 +16,16 @@ This folder contains the backend for the Habit Tracker app and implements schedu
 - The server runs a scheduler at startup to:
   - Run a reminder check every minute to send pending reminders.
   - Create daily reminders once per day for habits with reminders enabled.
+
+## Authentication
+
+The server provides a simple JWT-based authentication API:
+
+- `POST /api/auth/register` — register with `{ username, email, password }`
+- `POST /api/auth/login` — login with `{ email, password }`, returns `{ token, username }`
+- `POST /api/auth/logout` — logs out by blacklisting token in memory (demo only)
+
+Protected routes require the `Authorization: Bearer <token>` header, for example `GET /api/habits`.
 
 ## Analytics
 

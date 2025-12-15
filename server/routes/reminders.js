@@ -5,9 +5,13 @@ import { processScheduledReminders, createDailyReminders } from "../services/sch
 
 const router = express.Router();
 
-router.get("/:userId", async (req, res) => {
+import auth from "../middleware/auth.js";
+
+router.use(auth);
+
+router.get("/", async (req, res) => {
   try {
-    const reminders = await Reminder.find({ userId: req.params.userId })
+    const reminders = await Reminder.find({ userId: req.userId })
       .populate("habitId", "title")
       .sort({ scheduledFor: -1 })
       .limit(50);

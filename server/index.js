@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import habitRoutes from "./routes/habits.js";
+import authRoutes from "./routes/auth.js";
 import reminderRoutes from "./routes/reminders.js";
 import analyticsRoutes from "./routes/analytics.js";
 import { startReminderScheduler } from "./services/scheduler.js";
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/auth", authRoutes);
 app.use("/api/habits", habitRoutes);
 app.use("/api/reminders", reminderRoutes);
 app.use("/api/analytics", analyticsRoutes);

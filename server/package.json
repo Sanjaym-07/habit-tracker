@@ -10,7 +10,8 @@
     "reminders:check": "node scripts/run_reminders.js check",
     "reminders:create": "node scripts/run_reminders.js create",
     "reminders:test-flow": "node scripts/test_reminders_flow.js",
-    "analytics:test-flow": "node scripts/test_analytics_flow.js"
+    "analytics:test-flow": "node scripts/test_analytics_flow.js",
+    "auth:test-flow": "node scripts/test_auth_flow.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -18,6 +19,8 @@
     "express": "^4.21.0",
     "mongoose": "^8.8.0",
     "node-cron": "^3.0.3",
-    "nodemailer": "^6.9.15"
+    "nodemailer": "^6.9.15",
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^9.0.0"
   }
 }
