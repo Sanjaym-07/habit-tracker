@@ -9,7 +9,8 @@
     "dev": "node --watch index.js",
     "reminders:check": "node scripts/run_reminders.js check",
     "reminders:create": "node scripts/run_reminders.js create",
-    "reminders:test-flow": "node scripts/test_reminders_flow.js"
+    "reminders:test-flow": "node scripts/test_reminders_flow.js",
+    "analytics:test-flow": "node scripts/test_analytics_flow.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

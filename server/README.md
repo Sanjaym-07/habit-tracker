@@ -15,6 +15,16 @@ This folder contains the backend for the Habit Tracker app and implements schedu
   - Run a reminder check every minute to send pending reminders.
   - Create daily reminders once per day for habits with reminders enabled.
 
+## Analytics
+
+- The server exposes analytics endpoints under `/api/analytics/`:
+  - `GET /api/analytics/overview/:userId` — total habits, total completions, average completions per habit
+  - `GET /api/analytics/streaks/:userId` — list of habits with `currentStreak` and `highestStreak`
+  - `GET /api/analytics/completions/:userId?days=30` — daily counts for the last `days` days (default 30)
+  - `GET /api/analytics/weekday-pattern/:userId` — aggregated completions per weekday (Sunday=0)
+
+The heavy lifting and aggregation is implemented in `server/services/analyticsService.js` so the frontend can focus on visualization.
+
 ### Manual testing
 
 - You can trigger reminder tasks manually (development only):

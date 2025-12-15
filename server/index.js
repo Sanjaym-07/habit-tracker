@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import habitRoutes from "./routes/habits.js";
 import reminderRoutes from "./routes/reminders.js";
+import analyticsRoutes from "./routes/analytics.js";
 import { startReminderScheduler } from "./services/scheduler.js";
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/habits", habitRoutes);
 app.use("/api/reminders", reminderRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
