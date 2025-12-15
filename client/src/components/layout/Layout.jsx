@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Layout({markHabitComplete}) {
+function Layout() {
 
   const [habits, setHabits] = useState(() => {
     const stored = localStorage.getItem("habits");
@@ -66,7 +66,7 @@ function Layout({markHabitComplete}) {
     <div className="min-h-screen bg-slate-950 text-slate-200">
       <main className="p-6">
         <ToastContainer position="top-right" autoClose={2000} />
-        <Outlet context={{habits, setHabits, markHabitComplete}}/> 
+        <Outlet context={{habits, setHabits}}/> 
       </main>
     </div>
   )

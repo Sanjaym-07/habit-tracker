@@ -13,28 +13,26 @@ export const isHabitDue = (habit, date) => {
   }
 
 export const formatDate = (date) => {
-  return date.toLocalDateString("en-IN");
+  return new Date(date).toLocaleDateString("en-IN");
 }
 
-export const markHabitComplete = (habitId, date) => {
-    const habit = habits.find(h => h.id == habitId);
-    const dateInStr = formatDate(date.toISOString().split("T")[0]);
+export const markHabitComplete = (habitId, date, habits, setHabits) => {
+    const habit = habits.find(h => h.id === habitId);
+    if (!habit) return;
+    
+    const dateInStr = date.toISOString().split("T")[0];
     if (!habit.progress.includes(dateInStr)) habit.progress.push(dateInStr);
     
-    // Current Streak calculation
     if (!habit.lastCompleted) {
-    // first time completing
     habit.currentStreak = 1;
     } else {
         const lastDate = new Date(habit.lastCompleted);
         const diffDays = Math.floor((date - lastDate) / (1000 * 60 * 60 * 24));
 
-        if (habit.freq.mode === "daily") {
-          // daily: streak continues only if yesterday was completed
+        if (habit.freq.mode === "Daily") {
           habit.currentStreak = diffDays === 1 ? habit.currentStreak + 1 : 1;
-        } else if (habit.freq.mode === "weekly" || habit.freq.mode === "custom") {
-          // weekly/custom: check if today is next scheduled day
-          const scheduled = habit.freq.days; // array of numbers 0-6
+        } else if (habit.freq.mode === "Weekly" || habit.freq.mode === "Custom") {
+          const scheduled = habit.freq.days;
           const lastDayIndex = scheduled.indexOf(lastDate.getDay());
           const nextIndex = (lastDayIndex + 1) % scheduled.length;
           const nextScheduledDay = scheduled[nextIndex];
